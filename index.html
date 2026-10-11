@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#101323" />
   <title>Сечения с Павликом — 3D-конструктор</title>
-  <link rel="stylesheet" href="styles.css?v=8" />
-  <link rel="stylesheet" href="responsive.css?v=8" />
-  <link rel="stylesheet" href="polish.css?v=8" />
-  <link rel="stylesheet" href="final-theme.css?v=8" />
+  <link rel="stylesheet" href="styles.css?v=9" />
+  <link rel="stylesheet" href="responsive.css?v=9" />
+  <link rel="stylesheet" href="polish.css?v=9" />
+  <link rel="stylesheet" href="final-theme.css?v=9" />
 </head>
 <body>
   <div class="app-shell">
@@ -170,6 +170,11 @@
     <div class="solver-progress"><i class="active"></i><i></i><i></i><i></i></div>
     <strong id="solverTitle">Отметьте три точки</strong>
     <p id="solverText">Выберите на фигуре 3 точки, через которые должна проходить секущая плоскость.</p>
+    <div id="solverMethods" class="solver-methods" role="group" aria-label="Метод решения">
+      <button class="solver-method active" data-solver-method="trace"><b>Следы</b><small>линии на гранях</small></button>
+      <button class="solver-method" data-solver-method="project"><b>Проекция</b><small>параллельные грани</small></button>
+      <button class="solver-method" data-solver-method="combo"><b>Комбо</b><small>подобрать ход</small></button>
+    </div>
     <div class="solver-actions"><button id="solverBack" class="solver-secondary" disabled>Назад</button><button id="solverNext" class="solver-primary">Проверить точки</button></div>
   </section>
   <section id="settingsPanel" class="settings-panel" aria-label="Настройки">
@@ -233,6 +238,6 @@
     </section>
   </div>
   <div id="toast" class="toast" role="status"></div>
-  <script type="module" src="app.js?v=8"></script>
+  <script type="module" src="app.js?v=9"></script>
 </body>
 </html>
