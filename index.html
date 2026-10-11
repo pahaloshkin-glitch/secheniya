@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#101323" />
   <title>Сечения с Павликом — 3D-конструктор</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="responsive.css" />
-  <link rel="stylesheet" href="polish.css" />
-  <link rel="stylesheet" href="final-theme.css" />
+  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="stylesheet" href="responsive.css?v=3" />
+  <link rel="stylesheet" href="polish.css?v=3" />
+  <link rel="stylesheet" href="final-theme.css?v=3" />
 </head>
 <body>
   <div class="app-shell">
@@ -24,6 +24,7 @@
         <button class="mini-action solver-trigger" id="solverBtn" title="Открыть пошаговый решатор"><span>✦</span> Решатор</button>
         <button class="mini-action orbit-action" id="orbitBtn" title="Автоматически вращать модель"><span>↻</span> Вращать</button>
         <button class="mini-action guide-trigger" id="guideBtn" title="Открыть инструкцию"><span>?</span> Как строить</button>
+        <button class="mini-action settings-trigger" id="settingsBtn" title="Настройки оформления и мобильных кнопок"><span>⚙</span> Настройки</button>
         <button class="icon-action mobile-toggle" id="mobileToolsBtn" aria-label="Открыть инструменты" title="Инструменты">
           <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
@@ -81,6 +82,16 @@
           <div class="smart-row"><span><i class="smart-dot"></i> Умная привязка к рёбрам</span><button id="snapBtn" class="switch is-on" aria-pressed="true"><i></i></button></div>
         </section>
 
+        <section class="panel-section theme-section">
+          <div class="section-heading"><span>ОФОРМЛЕНИЕ</span><kbd>тема</kbd></div>
+          <p class="reference-caption">Выберите цвет рабочего пространства. Настройка сохранится на этом устройстве.</p>
+          <div class="theme-options" role="group" aria-label="Цветовая тема">
+            <button class="theme-choice active" data-theme-choice="sea" title="Мятная глубина"><i class="theme-dot sea"></i><span>Мята</span></button>
+            <button class="theme-choice" data-theme-choice="violet" title="Сумеречный фиолетовый"><i class="theme-dot violet"></i><span>Сумерки</span></button>
+            <button class="theme-choice" data-theme-choice="sunset" title="Тёплый коралл"><i class="theme-dot sunset"></i><span>Коралл</span></button>
+          </div>
+        </section>
+
         <section class="panel-section task-card">
           <div class="task-top"><span class="pulse"></span><span>ТРЕНИРОВКА</span></div>
           <strong>Постройте сечение</strong>
@@ -108,6 +119,9 @@
             <button data-mobile-tool="point" title="Поставить точку"><span>●</span><small>Точка</small></button>
             <button data-mobile-tool="segment" title="Соединить точки"><span>╱</span><small>Линия</small></button>
             <button data-mobile-tool="plane" title="Построить сечение"><span>◇</span><small>Сечение</small></button>
+            <button data-mobile-tool="extend" class="dock-hidden" title="Продлить прямую"><span>↝</span><small>След</small></button>
+            <button data-mobile-tool="intersect" class="dock-hidden" title="Пересечение прямых"><span>×</span><small>Пересечь</small></button>
+            <button data-mobile-tool="edgeCross" class="dock-hidden" title="Пересечение с ребром"><span>⊗</span><small>Ребро</small></button>
           </div>
           <div class="axis-widget" aria-label="Оси координат"><span class="axis-y">Y</span><span class="axis-x">X</span><span class="axis-z">Z</span><i></i></div>
           <div id="sceneHint" class="scene-hint"><span class="hint-key">1</span><span>Выберите три точки на рёбрах<br/>или добавьте свои инструментом <b>«Точка»</b>.</span></div>
@@ -147,9 +161,9 @@
         <button id="actionBtn" class="primary" disabled>Выберите 2 точки</button>
       </div>
     </footer>
+    <div id="mobileOverlay" class="mobile-overlay"></div>
   </div>
 
-  <div id="mobileOverlay" class="mobile-overlay"></div>
   <section id="solverDock" class="solver-dock" aria-live="polite">
     <button id="solverClose" class="solver-close" aria-label="Закрыть решатор">×</button>
     <div class="solver-kicker"><span>✦</span> РЕШАТОР · ПОШАГОВО</div>
@@ -158,6 +172,42 @@
     <p id="solverText">Выберите на фигуре 3 точки, через которые должна проходить секущая плоскость.</p>
     <div class="solver-actions"><button id="solverBack" class="solver-secondary" disabled>Назад</button><button id="solverNext" class="solver-primary">Проверить точки</button></div>
   </section>
+  <section id="settingsPanel" class="settings-panel" aria-label="Настройки">
+    <div class="settings-head"><div><span>НАСТРОЙКИ</span><strong>Рабочее пространство</strong></div><button id="settingsClose" aria-label="Закрыть настройки">×</button></div>
+    <div class="settings-scroll">
+      <section class="settings-section">
+        <div class="settings-label"><b>Темы оформления</b><small>Выбор сохранится на этом устройстве</small></div>
+        <div class="settings-themes" role="group" aria-label="Темы оформления">
+          <button class="settings-theme active" data-theme-choice="sea"><i class="swatch sea"></i><span>Мятная<br>глубина</span></button>
+          <button class="settings-theme" data-theme-choice="aurora"><i class="swatch aurora"></i><span>Северное<br>сияние</span></button>
+          <button class="settings-theme" data-theme-choice="violet"><i class="swatch violet"></i><span>Фиолетовые<br>сумерки</span></button>
+          <button class="settings-theme" data-theme-choice="indigo"><i class="swatch indigo"></i><span>Синий<br>неон</span></button>
+          <button class="settings-theme" data-theme-choice="sunset"><i class="swatch sunset"></i><span>Закат</span></button>
+          <button class="settings-theme" data-theme-choice="coral"><i class="swatch coral"></i><span>Коралловый<br>свет</span></button>
+          <button class="settings-theme" data-theme-choice="rose"><i class="swatch rose"></i><span>Розовый<br>киберпанк</span></button>
+          <button class="settings-theme" data-theme-choice="forest"><i class="swatch forest"></i><span>Лесной<br>контур</span></button>
+          <button class="settings-theme" data-theme-choice="graphite"><i class="swatch graphite"></i><span>Графит</span></button>
+        </div>
+      </section>
+      <section class="settings-section">
+        <div class="settings-label"><b>Быстрые инструменты снизу</b><small>На телефоне можно оставить только нужные</small></div>
+        <div class="dock-editor" role="group" aria-label="Настройка мобильной панели">
+          <button class="dock-option active" data-dock-tool="select"><span>⌁</span> Выбор</button>
+          <button class="dock-option active" data-dock-tool="point"><span>●</span> Точка</button>
+          <button class="dock-option active" data-dock-tool="segment"><span>╱</span> Линия</button>
+          <button class="dock-option active" data-dock-tool="plane"><span>◇</span> Сечение</button>
+          <button class="dock-option" data-dock-tool="extend"><span>↝</span> След</button>
+          <button class="dock-option" data-dock-tool="intersect"><span>×</span> Пересечь</button>
+          <button class="dock-option" data-dock-tool="edgeCross"><span>⊗</span> Ребро</button>
+        </div>
+      </section>
+      <section class="settings-section settings-switches">
+        <div><b>Анимации и неоновое свечение</b><small>Можно выключить при необходимости</small></div>
+        <button id="motionBtn" class="switch is-on" aria-pressed="true"><i></i></button>
+      </section>
+    </div>
+  </section>
+  <div id="settingsOverlay" class="settings-overlay"></div>
   <div id="modal" class="modal-backdrop" aria-hidden="true">
     <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <button class="modal-close" data-close-modal aria-label="Закрыть">×</button>
@@ -174,6 +224,6 @@
     </section>
   </div>
   <div id="toast" class="toast" role="status"></div>
-  <script type="module" src="app.js"></script>
+  <script type="module" src="app.js?v=3"></script>
 </body>
 </html>
