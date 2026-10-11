@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#101323" />
+  <title>Сечения с Павликом — 3D-конструктор</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="responsive.css" />
+  <link rel="stylesheet" href="polish.css" />
+  <link rel="stylesheet" href="final-theme.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Сечения с Павликом — на главную">
+        <span class="brand-mark"><i></i><i></i><i></i></span>
+        <span>СЕЧЕНИЯ <span>С ПАВЛИКОМ</span></span>
+      </a>
+      <nav class="crumbs" aria-label="Навигация">
+        <span>Конструктор</span><b>/</b><strong id="figureCrumb">Куб</strong>
+      </nav>
+      <div class="top-actions">
+        <button class="mini-action solver-trigger" id="solverBtn" title="Открыть пошаговый решатор"><span>✦</span> Решатор</button>
+        <button class="mini-action orbit-action" id="orbitBtn" title="Автоматически вращать модель"><span>↻</span> Вращать</button>
+        <button class="mini-action guide-trigger" id="guideBtn" title="Открыть инструкцию"><span>?</span> Как строить</button>
+        <button class="icon-action mobile-toggle" id="mobileToolsBtn" aria-label="Открыть инструменты" title="Инструменты">
+          <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <button class="icon-action mobile-toggle" id="mobileObjectsBtn" aria-label="Открыть объекты" title="Объекты">
+          <svg viewBox="0 0 24 24"><path d="M7 7h10M7 12h10M7 17h10"/><circle cx="4" cy="7" r=".7"/><circle cx="4" cy="12" r=".7"/><circle cx="4" cy="17" r=".7"/></svg>
+        </button>
+        <button class="icon-action" id="fullscreenBtn" aria-label="Полный экран" title="Полный экран">
+          <svg viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M21 16v5h-5M3 16v5h5"/></svg>
+        </button>
+        <button class="avatar" title="Профиль">У</button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <aside class="left-panel" id="toolsPanel">
+        <div class="mobile-panel-head"><strong>Инструменты</strong><button class="mobile-close-panel" data-close-panel="tools" aria-label="Закрыть">×</button></div>
+        <section class="panel-section figure-section">
+          <div class="section-kicker">ТЕЛО</div>
+          <label class="select-label" for="figureSelect">Фигура для исследования</label>
+          <div class="select-wrap">
+            <select id="figureSelect">
+              <option value="cube">Куб</option>
+              <option value="box">Прямоугольный параллелепипед</option>
+              <option value="triPrism">Треугольная призма</option>
+              <option value="hexPrism">Шестиугольная призма</option>
+              <option value="tetra">Тетраэдр</option>
+              <option value="pyramid">Четырёхугольная пирамида</option>
+              <option value="cylinder">Цилиндр</option>
+            </select>
+          </div>
+          <p class="figure-caption" id="figureCaption">Выберите три точки на рёбрах — и постройте сечение.</p>
+        </section>
+
+        <section class="panel-section modes-section">
+          <div class="section-heading"><span>ИНСТРУМЕНТЫ</span><kbd>1–7</kbd></div>
+          <div class="tool-list" role="toolbar" aria-label="Инструменты построения">
+            <button class="tool active" data-tool="select"><span class="tool-icon pointer-icon"></span><span><b>Выбор</b><small>выделить объект</small></span><em>1</em></button>
+            <button class="tool" data-tool="point"><span class="tool-icon point-icon"></span><span><b>Точка</b><small>на ребре или грани</small></span><em>2</em></button>
+            <button class="tool" data-tool="segment"><span class="tool-icon segment-icon"></span><span><b>Отрезок</b><small>соединить две точки</small></span><em>3</em></button>
+            <button class="tool" data-tool="plane"><span class="tool-icon plane-icon"></span><span><b>Секущая плоскость</b><small>по трём точкам</small></span><em>4</em></button>
+            <button class="tool" data-tool="extend"><span class="tool-icon extend-icon"></span><span><b>Продлить прямую</b><small>метод следов</small></span><em>5</em></button>
+            <button class="tool" data-tool="intersect"><span class="tool-icon intersect-icon"></span><span><b>Пересечение прямых</b><small>создать точку I</small></span><em>6</em></button>
+            <button class="tool" data-tool="edgeCross"><span class="tool-icon edgecross-icon"></span><span><b>Пересечь с ребром</b><small>линия × ребро фигуры</small></span><em>7</em></button>
+          </div>
+        </section>
+
+        <section class="panel-section reference-section">
+          <div class="section-heading"><span>ОПОРНЫЕ ПЛОСКОСТИ</span><kbd>вид</kbd></div>
+          <p class="reference-caption">Подсветите координатную плоскость для ориентирования в пространстве.</p>
+          <div class="plane-toggle-grid" role="group" aria-label="Опорные плоскости">
+            <button class="plane-toggle" data-refplane="xy"><i class="plane-swatch xy"></i><b>XY</b><small>фронталь</small></button>
+            <button class="plane-toggle" data-refplane="xz"><i class="plane-swatch xz"></i><b>XZ</b><small>вид сверху</small></button>
+            <button class="plane-toggle" data-refplane="yz"><i class="plane-swatch yz"></i><b>YZ</b><small>профиль</small></button>
+          </div>
+          <div class="smart-row"><span><i class="smart-dot"></i> Умная привязка к рёбрам</span><button id="snapBtn" class="switch is-on" aria-pressed="true"><i></i></button></div>
+        </section>
+
+        <section class="panel-section task-card">
+          <div class="task-top"><span class="pulse"></span><span>ТРЕНИРОВКА</span></div>
+          <strong>Постройте сечение</strong>
+          <p>Найдите пересечение тела с плоскостью, проходящей через три выбранные точки.</p>
+          <div class="task-progress"><span id="selectedCount">0</span> / 3 точки выбрано <i><b id="progressLine"></b></i></div>
+          <button id="randomTaskBtn" class="link-btn">Новая задача <span>↻</span></button>
+        </section>
+      </aside>
+
+      <section class="stage-wrap">
+        <div class="stage-header">
+          <div class="stage-title"><span class="live-dot"></span><span id="stageTitle">3D-модель · Куб</span></div>
+          <div class="view-controls">
+            <button id="homeView" title="Исходный ракурс"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5v8a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></button>
+            <span></span>
+            <button id="toggleGrid" class="is-on" title="Показать / скрыть сетку"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 10h16M4 16h16M10 4v16M16 4v16"/></svg></button>
+            <button id="focusSelection" title="Показать выбранные объекты"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5M8 8h8v8H8z"/></svg></button>
+            <button id="snapshotBtn" title="Сохранить изображение"><svg viewBox="0 0 24 24"><path d="M4 7h3l1.2-2h7.6L17 7h3v12H4zM12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg></button>
+          </div>
+        </div>
+        <div id="viewport" aria-label="Интерактивная трёхмерная сцена">
+          <canvas id="sceneCanvas"></canvas>
+          <div class="axis-widget" aria-label="Оси координат"><span class="axis-y">Y</span><span class="axis-x">X</span><span class="axis-z">Z</span><i></i></div>
+          <div id="sceneHint" class="scene-hint"><span class="hint-key">1</span><span>Выберите три точки на рёбрах<br/>или добавьте свои инструментом <b>«Точка»</b>.</span></div>
+          <div id="selectionTray" class="selection-tray" aria-live="polite"><span class="tray-caption">ВЫБРАНО</span><div id="selectionChips" class="selection-chips"><span class="empty-chip">Нет точек</span></div><button id="clearSelectionBtn" title="Снять выделение">×</button></div>
+          <div id="toolTip" class="tool-tip">Режим выбора · кликните по точке</div>
+          <div class="zoom-rail"><button id="zoomIn">+</button><input id="zoomRange" type="range" min="3" max="11" step="0.1" value="7" aria-label="Масштаб"/><button id="zoomOut">−</button></div>
+        </div>
+        <div class="stage-footer">
+          <div class="gesture-help"><span class="mouse-gesture rotate"></span> Повернуть <span class="mouse-gesture pan"></span> Сдвинуть <span class="mouse-gesture zoom"></span> Приблизить</div>
+          <div class="coords" id="coordsReadout">X — · Y — · Z —</div>
+        </div>
+      </section>
+
+      <aside class="right-panel" id="objectsPanel">
+        <div class="mobile-panel-head"><strong>Объекты сцены</strong><button class="mobile-close-panel" data-close-panel="objects" aria-label="Закрыть">×</button></div>
+        <div class="inspector-heading">
+          <div><div class="section-kicker">ОБЪЕКТЫ СЦЕНЫ</div><strong>Конструкция</strong></div>
+          <button id="hideAllBtn" class="icon-action small" title="Скрыть / показать все"><svg viewBox="0 0 24 24"><path d="M3 3l18 18M10.6 10.7a2 2 0 0 0 2.7 2.7M9.9 4.2A10.9 10.9 0 0 1 12 4c5.2 0 8.8 5 9.7 7.4a1.5 1.5 0 0 1 0 1.2c-.4 1.1-1.4 2.7-3 4.1M6.2 6.2C4.1 7.6 2.8 9.8 2.3 11.4a1.5 1.5 0 0 0 0 1.2C3.2 15 6.8 20 12 20c1.4 0 2.7-.4 3.8-1"/></svg></button>
+        </div>
+        <div id="objectTree" class="object-tree"></div>
+        <div class="inspector-bottom">
+          <div id="selectionInfo" class="selection-info"><span class="selection-dot"></span><span>Ничего не выделено</span></div>
+          <div class="selection-actions">
+            <button id="renameBtn" disabled>Переименовать</button>
+            <button id="deleteBtn" class="danger" disabled>Удалить</button>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="commandbar">
+      <div class="command-status"><span id="modeBadge">ВЫБОР</span><span id="commandText">Кликните по точке, чтобы добавить её в выделение.</span></div>
+      <div class="command-actions">
+        <button id="undoBtn" class="secondary" disabled><span>↶</span> Отменить</button>
+        <button id="redoBtn" class="secondary" disabled><span>↷</span> Повторить</button>
+        <button id="clearBtn" class="secondary"><span>⌫</span> Очистить</button>
+        <button id="actionBtn" class="primary" disabled>Выберите 2 точки</button>
+      </div>
+    </footer>
+  </div>
+
+  <div id="mobileOverlay" class="mobile-overlay"></div>
+  <section id="solverDock" class="solver-dock" aria-live="polite">
+    <button id="solverClose" class="solver-close" aria-label="Закрыть решатор">×</button>
+    <div class="solver-kicker"><span>✦</span> РЕШАТОР · ПОШАГОВО</div>
+    <div class="solver-progress"><i class="active"></i><i></i><i></i><i></i></div>
+    <strong id="solverTitle">Отметьте три точки</strong>
+    <p id="solverText">Выберите на фигуре 3 точки, через которые должна проходить секущая плоскость.</p>
+    <div class="solver-actions"><button id="solverBack" class="solver-secondary" disabled>Назад</button><button id="solverNext" class="solver-primary">Проверить точки</button></div>
+  </section>
+  <div id="modal" class="modal-backdrop" aria-hidden="true">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" data-close-modal aria-label="Закрыть">×</button>
+      <span class="modal-eyebrow">БЫСТРЫЙ СТАРТ</span>
+      <h2 id="modalTitle">Как построить сечение?</h2>
+      <ol class="guide-steps">
+        <li><b>Выберите фигуру</b><span>и поверните модель так, чтобы видеть нужные рёбра.</span></li>
+        <li><b>Отметьте 3 точки</b><span>кликом по вершинам или инструментом «Точка».</span></li>
+        <li><b>Постройте плоскость</b><span>«Сечения с Павликом» найдут контур сечения автоматически.</span></li>
+        <li><b>Или используйте метод следов</b><span>Продлите прямую и создайте точку её пересечения с ребром.</span></li>
+      </ol>
+      <div class="method-box"><span>◎</span><p><b>Быстрее с решатором:</b> нажмите «Решатор», выберите 3 точки — сервис разберёт построение по шагам. Для ручного метода доступны пересечения прямых и прямой с ребром.</p></div>
+      <button class="primary modal-ok" data-close-modal>Понятно, начнём</button>
+    </section>
+  </div>
+  <div id="toast" class="toast" role="status"></div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
