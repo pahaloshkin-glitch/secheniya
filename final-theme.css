@@ -33,3 +33,6 @@ html,body{font-size:17px!important}.brand{font-size:20px!important}.crumbs{font-
 
 /* V9: the solver offers an explicit, visible construction method before it starts. */
 .solver-methods{display:none;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin:10px 0 12px}.solver-methods.visible{display:grid}.solver-method{min-height:48px;padding:5px 3px;border:1px solid #36676d;border-radius:7px;background:#10353a;color:#a6c9c4;display:grid;place-content:center;gap:2px;text-align:center;transition:.18s}.solver-method b{font-size:10px}.solver-method small{font-size:8px;line-height:1.1;color:#85aca6}.solver-method.active{border-color:#77ecdd;background:linear-gradient(145deg,#15545a,#12383e);box-shadow:0 0 0 1px rgba(104,232,216,.16),0 0 15px rgba(54,214,193,.12);color:#effffb}.solver-method.active small{color:#b8f5ea}.solver-dock:has(.solver-methods.visible){min-height:224px}@media(max-width:760px){.solver-method{min-height:44px}.solver-dock:has(.solver-methods.visible){min-height:212px}}
+
+/* V12: keep the explanation above the 3D body, not over the construction. */
+@media(min-width:761px){.solver-dock{top:76px!important;width:min(430px,calc(100vw - 40px))!important;padding:12px 16px 11px!important}.solver-dock p{margin-bottom:9px!important}.solver-method{min-height:42px}.solver-dock:has(.solver-methods.visible){min-height:202px}}
