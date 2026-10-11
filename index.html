@@ -103,6 +103,12 @@
         </div>
         <div id="viewport" aria-label="Интерактивная трёхмерная сцена">
           <canvas id="sceneCanvas"></canvas>
+          <div class="mobile-quick-tools" role="toolbar" aria-label="Быстрые инструменты">
+            <button data-mobile-tool="select" class="active" title="Выбор"><span>⌁</span><small>Выбор</small></button>
+            <button data-mobile-tool="point" title="Поставить точку"><span>●</span><small>Точка</small></button>
+            <button data-mobile-tool="segment" title="Соединить точки"><span>╱</span><small>Линия</small></button>
+            <button data-mobile-tool="plane" title="Построить сечение"><span>◇</span><small>Сечение</small></button>
+          </div>
           <div class="axis-widget" aria-label="Оси координат"><span class="axis-y">Y</span><span class="axis-x">X</span><span class="axis-z">Z</span><i></i></div>
           <div id="sceneHint" class="scene-hint"><span class="hint-key">1</span><span>Выберите три точки на рёбрах<br/>или добавьте свои инструментом <b>«Точка»</b>.</span></div>
           <div id="selectionTray" class="selection-tray" aria-live="polite"><span class="tray-caption">ВЫБРАНО</span><div id="selectionChips" class="selection-chips"><span class="empty-chip">Нет точек</span></div><button id="clearSelectionBtn" title="Снять выделение">×</button></div>
