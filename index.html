@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#101323" />
   <title>Сечения с Павликом — 3D-конструктор</title>
-  <link rel="stylesheet" href="styles.css?v=6" />
-  <link rel="stylesheet" href="responsive.css?v=6" />
-  <link rel="stylesheet" href="polish.css?v=6" />
-  <link rel="stylesheet" href="final-theme.css?v=6" />
+  <link rel="stylesheet" href="styles.css?v=7" />
+  <link rel="stylesheet" href="responsive.css?v=7" />
+  <link rel="stylesheet" href="polish.css?v=7" />
+  <link rel="stylesheet" href="final-theme.css?v=7" />
 </head>
 <body>
   <div class="app-shell">
@@ -175,19 +175,8 @@
   <section id="settingsPanel" class="settings-panel" aria-label="Настройки">
     <div class="settings-head"><div><span>НАСТРОЙКИ</span><strong>Рабочее пространство</strong></div><button id="settingsClose" aria-label="Закрыть настройки">×</button></div>
     <div class="settings-scroll">
-      <section class="settings-section">
-        <div class="settings-label"><b>Темы оформления</b><small>Выбор сохранится на этом устройстве</small></div>
-        <div class="settings-themes" role="group" aria-label="Темы оформления">
-          <button class="settings-theme active" data-theme-choice="sea"><i class="swatch sea"></i><span>Мятная<br>глубина</span></button>
-          <button class="settings-theme" data-theme-choice="aurora"><i class="swatch aurora"></i><span>Северное<br>сияние</span></button>
-          <button class="settings-theme" data-theme-choice="violet"><i class="swatch violet"></i><span>Фиолетовые<br>сумерки</span></button>
-          <button class="settings-theme" data-theme-choice="indigo"><i class="swatch indigo"></i><span>Синий<br>неон</span></button>
-          <button class="settings-theme" data-theme-choice="sunset"><i class="swatch sunset"></i><span>Закат</span></button>
-          <button class="settings-theme" data-theme-choice="coral"><i class="swatch coral"></i><span>Коралловый<br>свет</span></button>
-          <button class="settings-theme" data-theme-choice="rose"><i class="swatch rose"></i><span>Розовый<br>киберпанк</span></button>
-          <button class="settings-theme" data-theme-choice="forest"><i class="swatch forest"></i><span>Лесной<br>контур</span></button>
-          <button class="settings-theme" data-theme-choice="graphite"><i class="swatch graphite"></i><span>Графит</span></button>
-        </div>
+      <section class="settings-section unified-theme-note">
+        <div class="settings-label"><b>Оформление</b><small>Единая тема «Мятная глубина» — мягкий контраст, неоновые акценты и одинаковые цвета на ПК и телефоне.</small></div>
       </section>
       <section class="settings-section">
         <div class="settings-label"><b>Быстрые инструменты снизу</b><small>На телефоне можно оставить только нужные</small></div>
@@ -244,6 +233,6 @@
     </section>
   </div>
   <div id="toast" class="toast" role="status"></div>
-  <script type="module" src="app.js?v=6"></script>
+  <script type="module" src="app.js?v=7"></script>
 </body>
 </html>
